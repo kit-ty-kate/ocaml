@@ -175,8 +175,10 @@ let acknowledge_pers_struct penv check modname pers_sig pm =
              ps_filename = filename;
              ps_flags = flags;
            } in
-  if ps.ps_name <> modname then
+  if ps.ps_name <> modname then begin
+    prerr_endline (ps.ps_name ^ " <> " ^ modname);
     error (Illegal_renaming(modname, ps.ps_name, filename));
+  end;
   List.iter
     (function
         | Rectypes ->
