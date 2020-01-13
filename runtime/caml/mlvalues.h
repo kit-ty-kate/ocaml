@@ -16,9 +16,7 @@
 #ifndef CAML_MLVALUES_H
 #define CAML_MLVALUES_H
 
-#ifndef CAML_NAME_SPACE
 #include "compatibility.h"
-#endif
 #include "config.h"
 #include "misc.h"
 
