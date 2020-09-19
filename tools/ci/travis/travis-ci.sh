@@ -182,19 +182,19 @@ EOF
     ;;
   i386)
     ./configure --build=x86_64-pc-linux-gnu --host=i386-linux \
-      CC='gcc -m32' AS='as -march=armv7' ASPP='gcc -m32 -c' \
+      CC='gcc -m32' AS='as --32' ASPP='gcc -m32 -c' \
       PARTIALLD='ld -r -melf_i386' \
       $configure_flags
     ;;
   arm32)
     ./configure --build=arm64-pc-linux-gnu --host=armv7-linux \
-      CC='gcc -m32' AS='as --32' ASPP='gcc -m32 -c' \
+      CC='gcc -march=armv7' AS='as -march=armv7' ASPP='gcc -march=armv7 -c' \
       PARTIALLD='ld -r -melf_armv7' \
       $configure_flags
     ;;
   ppc32)
     ./configure --build=ppc64le-pc-linux-gnu --host=powerpc-linux \
-      CC='gcc -m32' AS='as -a32' ASPP='gcc -m32 -c' \
+      CC='gcc -march=powerpc' AS='as -a32' ASPP='gcc -march=powerpc -c' \
       PARTIALLD='ld -r -melf_powerpc' \
       $configure_flags
     ;;
