@@ -187,15 +187,15 @@ EOF
       $configure_flags
     ;;
   arm32)
-    ./configure --build=arm64-pc-linux-gnu --host=arm-linux \
+    ./configure --build=arm64-pc-linux-gnu --host=armhf-linux \
       CC='gcc -m32' AS='as --32' ASPP='gcc -m32 -c' \
-      PARTIALLD='ld -r -melf_arm' \
+      PARTIALLD='ld -r -melf_armhf' \
       $configure_flags
     ;;
   ppc32)
-    ./configure --build=ppc64le-pc-linux-gnu --host=ppc32-linux \
+    ./configure --build=ppc64le-pc-linux-gnu --host=powerpc-linux \
       CC='gcc -m32' AS='as --32' ASPP='gcc -m32 -c' \
-      PARTIALLD='ld -r -melf_ppc32' \
+      PARTIALLD='ld -r -melf_powerpc' \
       $configure_flags
     ;;
   *)
