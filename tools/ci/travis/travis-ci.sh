@@ -188,14 +188,14 @@ EOF
     ;;
   arm32)
     ./configure --build=arm64-pc-linux-gnu --host=armv7-pc-linux-gnu \
-      CC='gcc -march=armv7' AS='as -march=armv7' ASPP='gcc -march=armv7 -c' \
+      CC='gcc -m32' AS='as -march=armv7' ASPP='gcc -m32 -c' \
       PARTIALLD='ld -r -melf_armv7' \
       $configure_flags || cat config.log
       exit 1
     ;;
   ppc32)
     ./configure --build=ppc64le-pc-linux-gnu --host=powerpc-pc-linux-gnu \
-      CC='gcc -march=powerpc' AS='as -a32' ASPP='gcc -march=powerpc -c' \
+      CC='gcc -m32' AS='as -a32' ASPP='gcc -m32 -c' \
       PARTIALLD='ld -r -melf_powerpc' \
       $configure_flags || cat config.log
       exit 1
