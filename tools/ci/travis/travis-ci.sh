@@ -187,7 +187,7 @@ EOF
       $configure_flags
     ;;
   arm32)
-    ./configure --build=arm64-pc-linux-gnu --host=arm32-linux \
+    ./configure --build=arm64-pc-linux-gnu --host=arm-linux \
       CC='gcc -m32' AS='as --32' ASPP='gcc -m32 -c' \
       PARTIALLD='ld -r -melf_arm' \
       $configure_flags
