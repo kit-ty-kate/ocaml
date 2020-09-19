@@ -187,13 +187,13 @@ EOF
       $configure_flags
     ;;
   arm32)
-    ./configure --build=arm64-pc-linux-gnu --host=armv7-linux \
+    ./configure --build=arm64-pc-linux-gnu --host=armv7-pc-linux-gnu \
       CC='gcc -march=armv7' AS='as -march=armv7' ASPP='gcc -march=armv7 -c' \
       PARTIALLD='ld -r -melf_armv7' \
       $configure_flags
     ;;
   ppc32)
-    ./configure --build=ppc64le-pc-linux-gnu --host=powerpc-linux \
+    ./configure --build=ppc64le-pc-linux-gnu --host=powerpc-pc-linux-gnu \
       CC='gcc -march=powerpc' AS='as -a32' ASPP='gcc -march=powerpc -c' \
       PARTIALLD='ld -r -melf_powerpc' \
       $configure_flags
