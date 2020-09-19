@@ -187,6 +187,9 @@ EOF
       $configure_flags
     ;;
   arm32)
+    sudo dpkg --add-architecture armhf
+    sudo apt-get update
+    sudo apt-get install crossbuild-essential-armhf
     ./configure --build=arm64-pc-linux-gnu --host=armv7-pc-linux-gnu \
       CC='gcc -m32' AS='as -march=armv7' ASPP='gcc -m32 -c' \
       PARTIALLD='ld -r -melf_armv7' \
@@ -194,6 +197,9 @@ EOF
       exit 1
     ;;
   ppc32)
+    sudo dpkg --add-architecture powerpc
+    sudo apt-get update
+    sudo apt-get install crossbuild-essential-powerpc
     ./configure --build=ppc64le-pc-linux-gnu --host=powerpc-pc-linux-gnu \
       CC='gcc -m32' AS='as -a32' ASPP='gcc -m32 -c' \
       PARTIALLD='ld -r -melf_powerpc' \
