@@ -23,6 +23,35 @@ matrix:
   - env: >-
       CI_KIND=build
       XARCH=x64
+    os: osx
+    osx_image: xcode11.3
+  - env: >-
+      CI_KIND=build
+      XARCH=x64
+    os: freebsd
+  - env: >-
+      CI_KIND=build
+      XARCH=arm64
+    arch: arm64
+  - env: >-
+      CI_KIND=build
+      XARCH=arm32
+    arch: arm64
+  - env: >-
+      CI_KIND=build
+      XARCH=ppc64
+    arch: ppc64le
+  - env: >-
+      CI_KIND=build
+      XARCH=ppc32
+    arch: ppc64le
+  - env: >-
+      CI_KIND=build
+      XARCH=s390x
+    arch: s390x
+  - env: >-
+      CI_KIND=build
+      XARCH=x64
       CONFIG_ARG=--enable-flambda
       OCAMLRUNPARAM=b,v=0
   - env: >-
@@ -54,27 +83,6 @@ matrix:
       XARCH=x64
       CONFIG_ARG=--enable-dependency-generation
       MAKE_ARG=-j
-  - env: >-
-      CI_KIND=build
-      XARCH=x64
-    os: osx
-    osx_image: xcode11.3
-  - env: >-
-      CI_KIND=build
-      XARCH=x64
-    os: freebsd
-  - env: >-
-      CI_KIND=build
-      XARCH=arm64
-    arch: arm64
-  - env: >-
-      CI_KIND=build
-      XARCH=ppc64
-    arch: ppc64le
-  - env: >-
-      CI_KIND=build
-      XARCH=s390x
-    arch: s390x
   - env: CI_KIND=check-depend
   - env: CI_KIND=changes
   - env: CI_KIND=manual

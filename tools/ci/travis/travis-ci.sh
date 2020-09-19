@@ -60,7 +60,12 @@ set -x
 
 PREFIX=~/local
 
-MAKE="make $MAKE_ARG"
+case "$TRAVIS_OS_NAME" in
+freebsd) MAKE=gmake;;
+*) MAKE=make;;
+esac
+
+MAKE="$MAKE $MAKE_ARG"
 SHELL=dash
 
 TRAVIS_CUR_HEAD=${TRAVIS_COMMIT_RANGE%%...*}
@@ -179,6 +184,18 @@ EOF
     ./configure --build=x86_64-pc-linux-gnu --host=i386-linux \
       CC='gcc -m32' AS='as --32' ASPP='gcc -m32 -c' \
       PARTIALLD='ld -r -melf_i386' \
+      $configure_flags
+    ;;
+  arm32)
+    ./configure --build=arm64-pc-linux-gnu --host=arm32-linux \
+      CC='gcc -m32' AS='as --32' ASPP='gcc -m32 -c' \
+      PARTIALLD='ld -r -melf_arm' \
+      $configure_flags
+    ;;
+  ppc32)
+    ./configure --build=ppc64le-pc-linux-gnu --host=ppc32-linux \
+      CC='gcc -m32' AS='as --32' ASPP='gcc -m32 -c' \
+      PARTIALLD='ld -r -melf_ppc32' \
       $configure_flags
     ;;
   *)
