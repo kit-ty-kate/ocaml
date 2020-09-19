@@ -172,7 +172,7 @@ EOF
       $CONFIG_ARG"
   fi
   case $XARCH in
-  x64)
+  x64|arm64|ppc64|s390x)
     ./configure $configure_flags
     ;;
   i386)
