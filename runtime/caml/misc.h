@@ -194,10 +194,10 @@ CAMLnoreturn_end;
 
    If it is [NULL], the error message is printed on stderr and then
    [abort()] is called. */
-extern void (*caml_fatal_error_hook) (char *msg, va_list args);
+extern void (*caml_fatal_error_hook) (const char *msg, va_list args);
 
 CAMLnoreturn_start
-CAMLextern void caml_fatal_error (char *, ...)
+CAMLextern void caml_fatal_error (const char *, ...)
 #ifdef __GNUC__
   __attribute__ ((format (printf, 1, 2)))
 #endif
@@ -359,7 +359,7 @@ CAMLextern int caml_read_directory(char_os * dirname,
 /* GC flags and messages */
 
 extern uintnat caml_verb_gc;
-void caml_gc_message (int, char *, ...)
+void caml_gc_message (int, const char *, ...)
 #ifdef __GNUC__
   __attribute__ ((format (printf, 2, 3)))
 #endif

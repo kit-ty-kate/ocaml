@@ -547,7 +547,7 @@ AS_CASE([$ocaml_cv_cc_vendor],
     cc_warnings=''],
   [outputobj='-o $(EMPTY)'
   warn_error_flag='-Werror'
-  cc_warnings='-Wall -Wdeclaration-after-statement'])
+  cc_warnings='-Wall'])
 
 AS_CASE([$enable_warn_error,AC_PACKAGE_VERSION],
   [yes,*|,*+dev*],
@@ -575,8 +575,7 @@ AS_CASE([$host],
         [AC_MSG_ERROR(m4_normalize([This version of Mingw GCC is too old.
           Please use GCC version 5 or above.]))],
       [gcc-*],
-        [internal_cflags="-Wno-unused $cc_warnings \
--fexcess-precision=standard"
+        [internal_cflags="-Wno-unused $cc_warnings"
         # TODO: see whether the code can be fixed to avoid -Wno-unused
         common_cflags="-O2 -fno-strict-aliasing -fwrapv -mms-bitfields"
         internal_cppflags='-D__USE_MINGW_ANSI_STDIO=0 -DUNICODE -D_UNICODE'
@@ -608,11 +607,10 @@ AS_CASE([$host],
     [gcc-4-*],
       [common_cflags="-std=gnu99 -O2 -fno-strict-aliasing -fwrapv \
 -fno-builtin-memcmp";
-      internal_cflags="$cc_warnings -fexcess-precision=standard"],
+      internal_cflags="$cc_warnings"],
     [gcc-*],
       [common_cflags="-O2 -fno-strict-aliasing -fwrapv";
-      internal_cflags="$cc_warnings -fno-common \
--fexcess-precision=standard"],
+      internal_cflags="$cc_warnings -fno-common"],
     [msvc-*],
       [common_cflags="-nologo -O2 -Gy- -MD $cc_warnings"
       common_cppflags="-D_CRT_SECURE_NO_DEPRECATE"

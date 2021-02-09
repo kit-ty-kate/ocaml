@@ -85,11 +85,10 @@ char * caml_instr_string (code_t pc)
   static char buf[256];
   char nambuf[128];
   int instr = *pc;
-  char *nam;
-
-  nam = (instr < 0 || instr > STOP)
+  const char *nam = (instr < 0 || instr > STOP)
     ? (snprintf (nambuf, sizeof(nambuf), "???%d", instr), nambuf)
     : names_of_instructions[instr];
+
   pc++;
   switch (instr) {
     /* Instructions with one integer operand */

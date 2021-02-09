@@ -65,7 +65,7 @@ void caml_set_fields (value v, uintnat start, uintnat filler)
 
 uintnat caml_verb_gc = 0;
 
-void caml_gc_message (int level, char *msg, ...)
+void caml_gc_message (int level, const char *msg, ...)
 {
   if ((caml_verb_gc & level) != 0){
     va_list ap;
@@ -76,9 +76,9 @@ void caml_gc_message (int level, char *msg, ...)
   }
 }
 
-void (*caml_fatal_error_hook) (char *msg, va_list args) = NULL;
+void (*caml_fatal_error_hook) (const char *msg, va_list args) = NULL;
 
-CAMLexport void caml_fatal_error (char *msg, ...)
+CAMLexport void caml_fatal_error (const char *msg, ...)
 {
   va_list ap;
   va_start(ap, msg);

@@ -609,12 +609,13 @@ type deferred_action =
   | ProcessImplementation of string
   | ProcessInterface of string
   | ProcessCFile of string
+  | ProcessCppFile of string
   | ProcessOtherFile of string
   | ProcessObjects of string list
   | ProcessDLLs of string list
 
-let c_object_of_filename name =
-  Filename.chop_suffix (Filename.basename name) ".c" ^ Config.ext_obj
+let c_object_of_filename ~ext name =
+  Filename.chop_suffix (Filename.basename name) ext ^ Config.ext_obj
 
 let process_action
     (ppf, implementation, interface, ocaml_mod_ext, ocaml_lib_ext) action =
@@ -636,7 +637,12 @@ let process_action
       readenv ppf (Before_compile name);
       Location.input_name := name;
       if Ccomp.compile_file name <> 0 then raise (Exit_with_status 2);
-      ccobjs := c_object_of_filename name :: !ccobjs
+      ccobjs := c_object_of_filename ~ext:".c" name :: !ccobjs
+  | ProcessCppFile name ->
+      readenv ppf (Before_compile name);
+      Location.input_name := name;
+      if Ccomp.compile_file name <> 0 then raise (Exit_with_status 2);
+      ccobjs := c_object_of_filename ~ext:".cpp" name :: !ccobjs
   | ProcessObjects names ->
       ccobjs := names @ !ccobjs
   | ProcessDLLs names ->
@@ -668,6 +674,8 @@ let action_of_file name =
     ProcessInterface name
   else if Filename.check_suffix name ".c" then
     ProcessCFile name
+  else if Filename.check_suffix name ".cpp" then
+    ProcessCppFile name
   else
     ProcessOtherFile name
 
@@ -690,7 +698,8 @@ let process_deferred_actions env =
     | Some output_name ->
         if !compile_only then begin
           if List.filter (function
-              | ProcessCFile name -> c_object_of_filename name <> output_name
+              | ProcessCFile name -> c_object_of_filename ~ext:".c" name <> output_name
+              | ProcessCppFile name -> c_object_of_filename ~ext:".cpp" name <> output_name
               | _ -> false) !deferred_actions <> [] then
             fatal "Options -c and -o are incompatible when compiling C files";
 
