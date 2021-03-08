@@ -11,6 +11,9 @@ OCaml 4.12, maintenance version
   (Gabriel Scherer, review by Thomas Refis and Luc Maranget,
    report by Nicolás Ojeda Bär)
 
+- #10277: Need to detect ambiguity recursively inside types
+  (Jacques Garrigue, review by Thomas Refis and Leo White)
+
 - #10310: configure's --enable-spacetime option now causes an error rather than
   being silently ignored.
   (David Allsopp, review by Gabriel Scherer)
