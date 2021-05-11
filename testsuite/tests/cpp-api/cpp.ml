@@ -1,6 +1,6 @@
 (* TEST
    modules = "cpp_stubs1.cpp cpp_stubs2.cpp"
-   flags = "-ccopt -x -ccopt c++"
+   flags = "-cc c++"
 *)
 
 external test1 : int -> unit = "test_cpp1"
