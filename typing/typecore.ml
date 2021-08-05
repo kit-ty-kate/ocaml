@@ -2719,12 +2719,12 @@ let rec is_inferred sexp =
    the specialized typing rule for those primitives.
 *)
 let translucid_apply_prim ~rev typ =
-  match get_desc typ with
+  match typ.desc with
  | Tarrow (Nolabel,a,b,_) ->
-      begin match get_desc b with
+      begin match b.desc with
       | Tarrow(Nolabel,c,d,_) ->
           let f, x, res = if rev then c, a, d else a, c, d in
-          begin match get_desc f with
+          begin match f.desc with
           | Tarrow(Nolabel,fl,fr,_) ->
                 is_Tvar fl && is_Tvar fr && is_Tvar x && is_Tvar res
                 && Types.eq_type fl x && Types.eq_type fr res
