@@ -2727,7 +2727,7 @@ let translucid_apply_prim ~rev typ =
           begin match f.desc with
           | Tarrow(Nolabel,fl,fr,_) ->
                 is_Tvar fl && is_Tvar fr && is_Tvar x && is_Tvar res
-                && Types.eq_type fl x && Types.eq_type fr res
+                && fl == x && fr == res
           | _ -> false
           end
       | _ -> false
