@@ -170,7 +170,7 @@ boot/flexlink.byte$(EXE): $(FLEXDLL_SOURCE_FILES)
 # runtime/ocamlrun is then installed to boot/ocamlrun and the stdlib artefacts
 # are copied to boot/
 .PHONY: coldstart
-coldstart: $(COLDSTART_DEPS)
+coldstart: $(COLDSTART_DEPS) runtime/primitives
 ifeq "$(BOOTSTRAPPING_FLEXDLL)" "false"
 	$(MAKE) runtime-all
 	$(MAKE) -C stdlib \
