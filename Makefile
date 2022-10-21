@@ -82,7 +82,7 @@ COMPLIBDIR=$(LIBDIR)/compiler-libs
 TOPINCLUDES=$(addprefix -I otherlibs/,$(filter-out %threads,$(OTHERLIBRARIES)))
 
 ifeq "$(BOOTSTRAPPING_FLEXDLL)" "false"
-  COLDSTART_DEPS =
+  COLDSTART_DEPS = runtime/primitives
 else
   COLDSTART_DEPS = boot/ocamlruns$(EXE)
 endif
@@ -170,7 +170,7 @@ boot/flexlink.byte$(EXE): $(FLEXDLL_SOURCE_FILES)
 # runtime/ocamlrun is then installed to boot/ocamlrun and the stdlib artefacts
 # are copied to boot/
 .PHONY: coldstart
-coldstart: $(COLDSTART_DEPS) runtime/primitives
+coldstart: $(COLDSTART_DEPS)
 ifeq "$(BOOTSTRAPPING_FLEXDLL)" "false"
 	$(MAKE) runtime-all
 	$(MAKE) -C stdlib \
