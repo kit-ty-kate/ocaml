@@ -1198,8 +1198,8 @@ dnl   [arch=riscv; model=riscv64; system=linux]
 
 AS_CASE([$ccomptype],
   [msvc],
-    [runtime_asm_objects="\$(ARCH)nt.${OBJEXT}"],
-  [runtime_asm_objects="\$(ARCH).${OBJEXT}"])
+    [runtime_asm_objects=${arch}nt.${OBJEXT}],
+  [runtime_asm_objects=${arch}.${OBJEXT}])
 
 AS_CASE([$enable_native_compiler,$arch],
   [no,*],

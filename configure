@@ -15269,9 +15269,9 @@ esac
 
 case $ccomptype in #(
   msvc) :
-    runtime_asm_objects="\$(ARCH)nt.${OBJEXT}" ;; #(
+    runtime_asm_objects=${arch}nt.${OBJEXT} ;; #(
   *) :
-    runtime_asm_objects="\$(ARCH).${OBJEXT}" ;;
+    runtime_asm_objects=${arch}.${OBJEXT} ;;
 esac
 
 case $enable_native_compiler,$arch in #(
