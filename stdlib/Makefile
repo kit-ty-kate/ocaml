@@ -93,10 +93,14 @@ ifeq "$(UNIX_OR_WIN32)" "unix"
 HEADERPROGRAM = header
 HEADER_PATH = $(BINDIR)/
 HEADER_TARGET_PATH = $(TARGET_BINDIR)/
+C_RUNTIME_NAME = $(call C_LITERAL,$(HEADER_PATH)$(1))
+C_TARGET_RUNTIME_NAME = $(call C_LITERAL,$(HEADER_TARGET_PATH)$(1))
 else # Windows
 HEADERPROGRAM = headernt
 HEADER_PATH =
 HEADER_TARGET_PATH =
+C_RUNTIME_NAME = $(HEADER_PATH)$(1)
+C_TARGET_RUNTIME_NAME = $(HEADER_TARGET_PATH)$(1)
 endif
 
 TARGETHEADERPROGRAM = target_$(HEADERPROGRAM)
@@ -147,7 +151,7 @@ ifneq "$(UNIX_OR_WIN32)" "win32"
 endif
 
 $(HEADERPROGRAM)%$(O): \
-  OC_CPPFLAGS += -DRUNTIME_NAME='"$(HEADER_PATH)ocamlrun$(subst .,,$*)"'
+  OC_CPPFLAGS += -DRUNTIME_NAME='$(call C_RUNTIME_NAME,ocamlrun$(subst .,,$*))'
 
 $(HEADERPROGRAM)%$(O): $(HEADERPROGRAM).c
 	$(V_CC)$(CC) -c $(OC_CFLAGS) $(CFLAGS) $(OC_CPPFLAGS) $(CPPFLAGS) \
@@ -163,7 +167,7 @@ tmptargetcamlheader%exe: $(TARGETHEADERPROGRAM)%$(O)
 
 $(TARGETHEADERPROGRAM)%$(O): $(HEADERPROGRAM).c
 	$(V_CC)$(CC) -c $(OC_CFLAGS) $(CFLAGS) $(OC_CPPFLAGS) $(CPPFLAGS) \
-	      -DRUNTIME_NAME='"$(HEADER_TARGET_PATH)ocamlrun$(subst .,,$*)"' \
+	      -DRUNTIME_NAME='$(call C_TARGET_RUNTIME_NAME,ocamlrun$(subst .,,$*)' \
 	      $(OUTPUTOBJ)$@ $^
 
 target_%: tmptarget%.exe
