@@ -1823,7 +1823,17 @@ AS_IF([$has_c99_float_ops],
     with --enable-imprecise-c99-float-ops]))])])
 
 ## getentropy
-AC_CHECK_FUNC([getentropy], [AC_DEFINE([HAS_GETENTROPY], [1])])
+AC_CHECK_HEADER([unistd.h],
+  [AC_CHECK_DECL([getentropy],
+                 [AC_DEFINE([HAS_GETENTROPY])], [],
+                 [[#include <unistd.h>]])],
+  [])
+AS_CASE([$host],
+  [*-*-haiku],
+    [cclibs="$cclibs -lbsd"
+    AC_SEARCH_LIBS([getentropy], [bsd])],
+  []
+)
 
 ## getrusage
 AC_CHECK_FUNC([getrusage], [AC_DEFINE([HAS_GETRUSAGE], [1])])

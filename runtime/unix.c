@@ -409,7 +409,8 @@ char *caml_secure_getenv (char const *var)
   return secure_getenv (var);
 #elif defined (HAS___SECURE_GETENV)
   return __secure_getenv (var);
-#elif defined(HAS_ISSETUGID)
+// TO RESTORE when TODO in haiku/src/libs/bsd/issetugid.c will be solved
+#elif defined(HAS_ISSETUGID) && !defined(__HAIKU__)
   if (!issetugid ())
     return getenv(var);
   else
