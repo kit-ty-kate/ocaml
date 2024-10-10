@@ -1,15 +1,15 @@
+#include <iostream>
 #define CAML_INTERNALS
 #include "all-includes.h"
 
 extern "C" {
-#include <stdio.h>
 
 value test_cpp3(value v)
 {
   CAMLparam1(v);
 
-  printf("In test C++ 3, v = %d\n", Int_val(v));
-  fflush(stdout);
+  std::cout << "In test C++ 3, v = " << Int_val(v) << std::endl;
+  std::flush(std::cout);
 
   CAMLreturn (Val_unit);
 }
