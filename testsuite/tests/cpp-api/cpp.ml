@@ -2,6 +2,9 @@
    modules = "cpp_stubs1.c cpp_stubs2.c cpp_stubs3.c";
    readonly_files = "all-includes.h";
    flags = "-ccopt -x -ccopt c++ -ccopt -std=c++11";
+   {
+     native;
+   }
 *)
 
 external test1 : int -> unit = "test_cpp1"
